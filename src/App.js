@@ -10,7 +10,7 @@ import Cookies from 'js-cookie'
 import Homepage from "views/Pages/Homepage";
 
 const App = () => {
-  const { isOnline, token } = useSelector((state) => state.commonState);
+  const { isOnline, token ,usernamee ,passwordd} = useSelector((state) => state.commonState);
   const sizer = useSize();
   const dispatch = useDispatch();
   const navigate = useCustomNavigate();
@@ -22,7 +22,7 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    if (!token) {
+    if (!token || !usernamee || !passwordd) {
       navigate("/")
     }
   }, [token])

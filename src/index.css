@@ -447,9 +447,9 @@ header {
 .body-table {
   width: 90%;
   background-color: #fff;
-  min-height: 70vh;
-  height: auto;
+  height: 73vh !important;
   border-radius: 8px;
+  overflow-y: scroll;
 }
 
 .table-container {

@@ -22,20 +22,19 @@ const LoginForm = () => {
     };
 
     const handleSubmit = () => {
-        // let username = window.atob(usernamee)
-        // let password = window.atob(passwordd)
-        // let hashPassword = sha256(password) 
-        // const basicAuth = "Basic " + btoa(`${username}:${hashPassword}`);
+        let username = window.atob(usernamee)
+        let password = window.atob(passwordd)
+        let hashPassword = sha256(password) 
+        const basicAuth = "Basic " + btoa(`${username}:${hashPassword}`);
 
-        let username = "matsuri"
-        let password = "fc153ac36455604c6a6bcb3e22c0a4debfb746d59ad4a33a4b0d50f315206958d78da64e88957993e537e5ef235537a65ac0bc8fbaa725ae3e8e151617e82b81"
-        const basicAuth = "Basic " + btoa(`${username}:${password}`);
-
+        // let username = "matsuri"
+        // let password = "fc153ac36455604c6a6bcb3e22c0a4debfb746d59ad4a33a4b0d50f315206958d78da64e88957993e537e5ef235537a65ac0bc8fbaa725ae3e8e151617e82b81"
+        // const basicAuth = "Basic " + btoa(`${username}:${password}`);
         dispatch(handleLogin(basicAuth))
     };
 
     useEffect(() => {
-        if (token) {
+        if (token && usernamee && passwordd) {
             navigate("/home")
         }
 
@@ -55,7 +54,7 @@ const LoginForm = () => {
             <Row className="mb-3">
                 <InputGroup
                     controlId="validationLoginUsername"
-                    gropuClassName="col-12 py-2"
+                    gropuClassName="col-12 py-2 mb-2"
                     inputHeading="Username"
                     inputType="text"
                     placeholder="Username"
@@ -66,7 +65,7 @@ const LoginForm = () => {
 
                 <InputGroup
                     controlId="validationLoginPassword"
-                    gropuClassName="col-12 py-2"
+                    gropuClassName="col-12 py-2 mb-2"
                     inputHeading="Password"
                     inputType="password"
                     placeholder="Password"

@@ -12,7 +12,7 @@ const FormSelect = ({
 
     return (
         <Form.Select onChange={change} className={className}>
-            <option value="">select</option>
+            {/* <option value="">select</option> */}
             {options?.map((val, ind) => (
                 <option value={val?.name} key={ind} selected={value === val?.name ? true : false}>
                     {val?.name}

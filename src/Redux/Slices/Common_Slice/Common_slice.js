@@ -13,8 +13,8 @@ const commonSlice = createSlice({
         buttonSpinner: false,
 
         //login states
-        usernamee: '',
-        passwordd: '',
+        usernamee: Cookies.get("username") ? Cookies.get("username") : '',
+        passwordd: Cookies.get("password") ? Cookies.get("password") : '',
         eyeOpen: false,
         validated: false,
 
@@ -85,6 +85,9 @@ const commonSlice = createSlice({
 
         //api 
         loginRequest(state, actions) {
+            Cookies.set("username", state.usernamee);
+            Cookies.set("password", state.passwordd);
+
             return {
                 ...state,
                 buttonSpinner: true 
@@ -128,6 +131,8 @@ const commonSlice = createSlice({
         //logout
         logout(state,actions){
             Cookies.remove("token")
+            Cookies.remove("username")
+            Cookies.remove("password")
             return{
                 ...state,
                 token:null

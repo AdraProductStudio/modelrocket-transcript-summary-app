@@ -37,8 +37,12 @@ export const handleGetClientSummaryData = (clientname) => async (dispatch) => {
         dispatch(getSummaryRequest())
         const obj = { client_name: clientname }
         const { data } = await axiosInstance.post("/get_client_conversation_details", obj);
-        console.log(data)
-        dispatch(getSummaryResponse())
+        
+        const clientData = data?.data?.map((value, index) => ({
+            ...value,
+            S_No: index + 1 
+        }));
+        dispatch(getSummaryResponse(clientData))
     } catch (err) {
         dispatch(getSummaryFailure())
     }
