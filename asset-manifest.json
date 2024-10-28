@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/modelrocket-transcript-summary-app.git/static/css/main.984b9e72.css",
-    "main.js": "/modelrocket-transcript-summary-app.git/static/js/main.93b73ff1.js",
+    "main.js": "/modelrocket-transcript-summary-app.git/static/js/main.e516b746.js",
     "index.html": "/modelrocket-transcript-summary-app.git/index.html",
     "main.984b9e72.css.map": "/modelrocket-transcript-summary-app.git/static/css/main.984b9e72.css.map",
-    "main.93b73ff1.js.map": "/modelrocket-transcript-summary-app.git/static/js/main.93b73ff1.js.map"
+    "main.e516b746.js.map": "/modelrocket-transcript-summary-app.git/static/js/main.e516b746.js.map"
   },
   "entrypoints": [
     "static/css/main.984b9e72.css",
-    "static/js/main.93b73ff1.js"
+    "static/js/main.e516b746.js"
   ]
 }
