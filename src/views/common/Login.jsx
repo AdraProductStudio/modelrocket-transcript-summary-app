@@ -14,7 +14,7 @@ const Login = () => {
                 <div className="text-center mb-3">
                   <Img src={Image.companyLogoBlue} alt="modelrocket-logo" />
                   <p className="text-secondary fw-bold mt-3">
-                    Onboarding Web App
+                  Transcript Summary
                   </p>
                   <hr className="text-secondary mt-2" />
                 </div>
