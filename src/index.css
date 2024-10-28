@@ -476,6 +476,10 @@ header {
 .hudJpJ {
   padding-left: 0px !important;
 }
+.sc-fAUdSK{
+  justify-content: center !important;
+  align-items: center !important;
+}
 
 @media screen and (min-width: 320px) and (max-width: 425px) {
   .model-rocket-header {
