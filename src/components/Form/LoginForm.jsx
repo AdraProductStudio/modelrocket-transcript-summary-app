@@ -9,11 +9,16 @@ import { handleClearErrors, handleEyeFunction, handleLogin, handleLoginCredentia
 import SpinnerComponent from 'components/Spinner/Spinner';
 import { toast } from 'react-toastify';
 import sha256 from 'sha256';
+import { logout } from 'Redux/Slices/Common_Slice/Common_slice';
 
 const LoginForm = () => {
     const { usernamee, passwordd, eyeOpen, buttonSpinner, validated, loginErr, token } = useSelector((state) => state.commonState);
     const dispatch = useDispatch();
     const navigate = useCustomNavigate();
+
+    useEffect(()=>{
+        dispatch(logout())
+    },[])
 
     const handlSubmitOnEnter = (e) => {
         if (e.key === "Enter") {
@@ -22,14 +27,11 @@ const LoginForm = () => {
     };
 
     const handleSubmit = () => {
-        let username = window.atob(usernamee)
-        let password = window.atob(passwordd)
+        let username = window.atob(usernamee).trim()
+        let password = window.atob(passwordd).trim()
         let hashPassword = sha256(password) 
         const basicAuth = "Basic " + btoa(`${username}:${hashPassword}`);
-
-        // let username = "matsuri"
-        // let password = "fc153ac36455604c6a6bcb3e22c0a4debfb746d59ad4a33a4b0d50f315206958d78da64e88957993e537e5ef235537a65ac0bc8fbaa725ae3e8e151617e82b81"
-        // const basicAuth = "Basic " + btoa(`${username}:${password}`);
+ 
         dispatch(handleLogin(basicAuth))
     };
 
