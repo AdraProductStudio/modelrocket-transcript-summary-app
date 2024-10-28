@@ -16,11 +16,9 @@ const Login = () => {
                   <p className="text-secondary fw-bold mt-3">
                   Transcript Summary
                   </p>
-                  <hr className="text-secondary mt-2" />
+                  <hr className="text-secondary mt-2 mb-4"  />
                 </div>
-                <h2 className="fs-6 fw-normal text-center text-secondary mt-4 mb-4">
-                  Modal Rocket login
-                </h2>
+              
                 <LoginForm />
               </div>
             </div>
