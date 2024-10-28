@@ -14,11 +14,11 @@ const Login = () => {
                 <div className="text-center mb-3">
                   <Img src={Image.companyLogoBlue} alt="modelrocket-logo" />
                   <p className="text-secondary fw-bold mt-3">
-                  Transcript Summary
+                    Client Dashboard
                   </p>
-                  <hr className="text-secondary mt-2 mb-4"  />
+                  <hr className="text-secondary mt-2 mb-4" />
                 </div>
-              
+
                 <LoginForm />
               </div>
             </div>
