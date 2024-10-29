@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'components/Input/InputGroup';
@@ -9,12 +9,21 @@ import { handleClearErrors, handleEyeFunction, handleLogin, handleLoginCredentia
 import SpinnerComponent from 'components/Spinner/Spinner';
 import { toast } from 'react-toastify';
 import sha256 from 'sha256';
-import { logout } from 'Redux/Slices/Common_Slice/Common_slice';
+import { logout, resetLoginForm } from 'Redux/Slices/Common_Slice/Common_slice';
 
 const LoginForm = () => {
     const { usernamee, passwordd, eyeOpen, buttonSpinner, validated, loginErr, token } = useSelector((state) => state.commonState);
     const dispatch = useDispatch();
     const navigate = useCustomNavigate();
+
+    const [showError,setShowError]=useState({
+        usernameErr : false,
+        passwordErr : false
+    })
+    const [errMessage, setErrorMessage] = useState({
+        usernameErr : "",
+        passwordErr : ""
+    })
 
     useEffect(()=>{
         dispatch(logout())
@@ -26,6 +35,8 @@ const LoginForm = () => {
         }
     };
 
+   
+
     const handleSubmit = () => {
         let username = window.atob(usernamee).trim()
         let password = window.atob(passwordd).trim()
@@ -33,11 +44,15 @@ const LoginForm = () => {
         const basicAuth = "Basic " + btoa(`${username}:${hashPassword}`);
  
         dispatch(handleLogin(basicAuth))
+
+      
     };
 
     useEffect(() => {
         if (token && usernamee && passwordd) {
             navigate("/home")
+            dispatch(resetLoginForm())
+
         }
 
         if (loginErr) {
@@ -45,14 +60,56 @@ const LoginForm = () => {
                 position: "top-right",
                 type: 'error',
                 onOpen: () => dispatch(handleClearErrors)
-            })
+            
+            },dispatch(resetLoginForm()))
             return
         }
     }, [loginErr, token, dispatch])
 
 
+    const handleBlur = (value)=>{
+        if(value==="Username"){
+            if(usernamee === ""){
+                setShowError({
+                    ...showError,usernameErr : true
+                })
+                setErrorMessage({
+                    ...errMessage,usernameErr : "username is required"
+                })
+            }else{
+                setShowError({
+                    ...showError,usernameErr : false
+
+                })
+                setErrorMessage({
+                    ...errMessage,usernameErr : ""
+                })
+            }
+        }
+        
+        else if(value==="Password"){
+            if(passwordd === ""){
+                setShowError({
+                    ...showError,passwordErr : true
+                })
+                setErrorMessage({
+                    ...errMessage,passwordErr : "password is required"
+                })
+            }else{
+                setShowError({
+                    ...showError,passwordErr : false
+                })
+                setErrorMessage({
+                    ...errMessage,passwordErr : ""
+                })
+            }
+        }
+
+      
+    }      
+
     return (
-        <Form noValidate validated={validated} className='pb-3'>
+        <Form noValidate validated={validated} className='pb-3' >
             <Row className="mb-3">
                 <InputGroup
                     controlId="validationLoginUsername"
@@ -63,7 +120,12 @@ const LoginForm = () => {
                     inputError={"Username required"}
                     change={(e) => dispatch(handleLoginCredentials({ username: e.target.value }))}
                     value={window.atob(usernamee)}
+                    handleBlur={() => handleBlur("Username")}
                 />
+                {
+                    showError.usernameErr ? <span className="text-danger">{errMessage.usernameErr}</span> : null
+                }
+           
 
                 <InputGroup
                     controlId="validationLoginPassword"
@@ -77,7 +139,12 @@ const LoginForm = () => {
                     eyeState={!eyeOpen}
                     eyeFunctionClick={() => dispatch(handleEyeFunction())}
                     value={window.atob(passwordd)}
+                    handleBlur={() => handleBlur("Password")}
                 />
+                {
+                    showError.passwordErr ? <span className="text-danger">{errMessage.passwordErr}</span> : null
+                }
+              
             </Row>
 
             {/* <Form.Group className="mb-3">

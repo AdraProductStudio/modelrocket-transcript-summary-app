@@ -8,6 +8,7 @@ import {
     updateLoginCredentials,
     updateEyeFunction,
 
+
     clearLoginError,
     loginRequest,
     loginResponse,
@@ -55,6 +56,14 @@ export const handleClearErrors = dispatch => {
     dispatch(clearLoginError())
 }
 
+// export const CLEAR_LOGIN_CREDENTIALS = 'CLEAR_LOGIN_CREDENTIALS';
+
+// export const clearLoginCredentials = () => ({
+//     type: CLEAR_LOGIN_CREDENTIALS,
+// });
+
+
+
 export const handleLogin = (basicAuth) => async (dispatch) => {
     try {
         dispatch(loginRequest())
@@ -68,6 +77,9 @@ export const handleLogin = (basicAuth) => async (dispatch) => {
 
         if (data.error_code === 200) {
             dispatch(loginResponse(data?.data?.token))
+         
+       
+        
         } else {
             dispatch(loginFailure(data?.message))
         }
@@ -80,6 +92,7 @@ export const handleBearerToken = (token) => dispatch => {
     dispatch(updateToken(token))
 }
 
-export const handleLogout = () => dispatch =>{
-    dispatch(logout())
+export const handleLogout = () => (dispatch)=>{
+    dispatch(logout());
+  
 }

@@ -82,7 +82,14 @@ const commonSlice = createSlice({
             }
         },
 
+        resetLoginForm(state) {
+            state.usernamee = '';
+            state.passwordd = '';
+          },
 
+       
+
+      
         //api 
         loginRequest(state, actions) {
             Cookies.set("username", state.usernamee);
@@ -157,7 +164,8 @@ export const {
     loginResponse,
     loginFailure,
     updateToken,
-    logout
+    logout,
+    resetLoginForm,
 } = actions;
 
 export default reducer
